@@ -1,10 +1,26 @@
+import { NextFunction } from 'express';
 import CustomError from '../../classes/CustomError';
+import {User} from '@sharedTypes/DBTypes';
+import fetchData from '../../utils/fetchData';
 // TODO: Import necessary types and models
 
 // TODO: Define setupTwoFA function
-const setupTwoFA = async (req, res, next) => {
+const setupTwoFA = async (
+  req: Request<{}, {}, User >,
+  res: Response<qrCodeUrl: string>,
+  next: NextFunction,) => {
   try {
+
+
     // TODO: Register user to AUTH API
+    const options = {RequestInit =
+      {method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.AUTH_API_KEY}`
+      body: JSON.stringify(req.body)
+    };
+    const userResponse = await fetchData();
 
     // TODO: Generate a new 2FA secret
 
